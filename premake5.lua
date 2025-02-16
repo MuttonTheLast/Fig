@@ -1,9 +1,12 @@
 include "premake5-manager.lua"
 
+
 workspace "Fig"  
     configurations { "Debug", "Release" } 
     architecture "x86_64"
     location "./"
+    buildoptions { "/utf-8" }
+    
     -- Include build.lua files in your project
     local buildScripts = NZA_findBuildScripts(".")
     for _, script in ipairs(buildScripts) do

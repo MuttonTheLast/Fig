@@ -1,8 +1,21 @@
 prj_name = "Fig"
+prj_kindof = "SharedLib"
 prj_libs = {
     "%{cfg.buildcfg}/sdl3.lib"
 
 }
+
+prj_postbuild = {
+    "{COPY} %{wks.location}/build/bin/%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}/*."..SharedLibExt.." %{wks.location}/build/bin/%{cfg.architecture}/%{cfg.buildcfg}/Sandbox/"
+}
+
+prj_includes = {
+    "%{prj.location}/src/Fig/",
+}
+
+prj_pch = "figpch.h"
+prj_pchs = "%{prj.location}/src/Fig/figpch.cpp"
+
 --[[
 prj_name = nil -- "ProjectName" !important
 prj_loc = nil -- "Better/Not/Change/"

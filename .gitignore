@@ -2,8 +2,8 @@
 *.sln
 *.vcxproj*
 .vs/
-include/
-lib/
+/include/
+/lib/
 
 # Premake Shits
 build/
