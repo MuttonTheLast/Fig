@@ -10,6 +10,11 @@ namespace Fig
 	}
 	void Application::Run()
 	{
-		while (true);
+
+
+		while (true)
+		{
+			std::cout;
+		}
 	}
 }

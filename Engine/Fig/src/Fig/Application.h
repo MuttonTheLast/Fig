@@ -1,19 +1,19 @@
 #pragma once
 #include "Core.h"
 
+
 namespace Fig
 {
-	class FIG_API Application
-	{
-	public:
+    class FIG_API Application
+    {
+    public:
+        Application();
+        ~Application();
 
-		Application();
-		~Application();
+        void Run();
+    };
 
-		void Run();
-	};
-
-	// Create Custom App Entry Point Class
-	Application* CreateApplication();
+    // Create Custom App Entry Point Class
+    Application* CreateApplication();
 }
 

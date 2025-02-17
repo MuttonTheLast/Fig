@@ -10,6 +10,29 @@ elseif os.target() == "maxos" then
     SharedLibExt = ".dylib"
 end
 
+
+function NZA_definePerPlatformData()
+    filter "system:windows"
+        defines { "PLATFORM_WINDOWS" }
+    filter "system:linux"
+        defines { "PLATFORM_LINUX" }
+    filter "system:macosx"
+        defines { "PLATFORM_MACOS" }
+    filter "system:android"
+        defines { "PLATFORM_ANDROID" }
+    filter {}
+end
+
+function NZA_addConfig(sln_configs)
+    for key, val in pairs(sln_configs) do
+        filter("configurations:"..key)
+        if val["defines"] then 
+            defines (val["defines"])
+        end
+        filter{}
+    end
+end
+
 function NZA_newProject()
     prj_libfolder = prj_libfolder or "%{wks.location}/lib/"
 
@@ -84,8 +107,8 @@ function NZA_newProject()
             defines(prj_defines)
         end
 
-        if prj_kindof == "SharedLib" and os.target() == "windows" then
-            defines { string.upper(prj_name).."_BUILD_DLL" }  
+        if prj_kindof == "SharedLib" then
+            defines { string.upper(prj_name).."_BUILD_SHARED_LIB" }  
         end
 
         filter "configurations:Debug"
@@ -98,14 +121,10 @@ function NZA_newProject()
             optimize "On"
         filter{}
 
+        NZA_definePerPlatformData()
+
         if prj_configs then 
-            for key, val in pairs(configs) do
-                filter("configurations:"..key)
-                if val["defines"] then 
-                    defines (val["defines"])
-                end
-                filter{}
-            end
+            NZA_addConfig(prj_configs)
         end
 
 end

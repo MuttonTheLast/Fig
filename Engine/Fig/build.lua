@@ -6,7 +6,7 @@ prj_libs = {
 }
 
 prj_postbuild = {
-    "{COPY} %{wks.location}/build/bin/%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}/*."..SharedLibExt.." %{wks.location}/build/bin/%{cfg.architecture}/%{cfg.buildcfg}/Sandbox/"
+    "{COPY} %{wks.location}/build/bin/%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}/*"..SharedLibExt.." %{wks.location}/build/bin/%{cfg.architecture}/%{cfg.buildcfg}/Sandbox/"
 }
 
 prj_includes = {
@@ -16,15 +16,22 @@ prj_includes = {
 prj_pch = "figpch.h"
 prj_pchs = "%{prj.location}/src/Fig/figpch.cpp"
 
+prj_configs = {
+    ["DEBUG"] = {
+        ["defines"] = {"DEBUG_TOOLS=3"},
+    }
+}
+
+
 --[[
 prj_name = nil -- "ProjectName" !important
 prj_loc = nil -- "Better/Not/Change/"
 prj_configs = nil -- (better use premake things by hand just implumented defines) 
 usage (these are implumented by default) : { 
-    ["configurations:Release"] = {
+    ["Release"] = {
         ["defines"] = {"NDEBUG", "Release"},
     }
-    ["configurations:Debug"] = 
+    ["Debug"] = 
     {
         ["defines"] = {"DEBUG", "_DEBUG"},
     }
