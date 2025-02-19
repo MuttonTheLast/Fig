@@ -1,7 +1,7 @@
 prj_name = "Fig"
 prj_kindof = "SharedLib"
 prj_libs = {
-    "%{cfg.buildcfg}/sdl3.lib"
+    "%{cfg.buildcfg}/sdl3"
 
 }
 

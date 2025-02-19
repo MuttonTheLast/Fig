@@ -5,7 +5,11 @@ workspace "Fig"
     configurations { "Debug", "Release" } 
     architecture "x86_64"
     location "./"
-    buildoptions { "/utf-8" }
+    if os.target() == "windows" then
+        buildoptions { "/utf-8" }
+    elseif os.target() == "linux" then
+        buildoptions { "-g -finput-charset=UTF-8 -fexec-charset=UTF-8" }
+    end
 
     -- Include build.lua files in your project
     local buildScripts = NZA_findBuildScripts(".")
